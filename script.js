@@ -3,22 +3,30 @@ function getNumbers() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve([1, 2, 3, 4]);
-    }, 1000); // Reduced delay to 1 second
+    }, 3000); // Resolves after 3 seconds
   });
 }
 
 getNumbers()
   .then((numbers) => {
-    // First promise: filter out odd numbers immediately
-    const evenNumbers = numbers.filter((num) => num % 2 === 0);
-    document.getElementById("output").textContent = evenNumbers.join(", ");
-    return evenNumbers; // Directly return the even numbers
+    // Filter out odd numbers and print the array after 1 second
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const evenNumbers = numbers.filter((num) => num % 2 === 0);
+        document.getElementById("output").textContent = evenNumbers.join(", ");
+        resolve(evenNumbers);
+      }, 1000); // Delay of 1 second
+    });
   })
   .then((evenNumbers) => {
-    // Second promise: multiply even numbers by 2 immediately
-    const multipliedNumbers = evenNumbers.map((num) => num * 2);
-    document.getElementById("output").textContent =
-      multipliedNumbers.join(", ");
-    return multipliedNumbers; // Directly return the multiplied numbers
+    // Multiply even numbers by 2 and print the array after 2 seconds
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const multipliedNumbers = evenNumbers.map((num) => num * 2);
+        document.getElementById("output").textContent =
+          multipliedNumbers.join(", ");
+        resolve(multipliedNumbers);
+      }, 2000); // Delay of 2 seconds
+    });
   })
   .catch((err) => console.error(err));
