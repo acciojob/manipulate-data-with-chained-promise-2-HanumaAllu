@@ -16,7 +16,7 @@ getNumbers()
         const evenNumbers = numbers.filter((num) => num % 2 === 0);
         document.getElementById("output").textContent = evenNumbers.join(", ");
         resolve(evenNumbers);
-      }, 1000); // Delay of 1 second
+      }, 2000); // Delay of 1 second
     });
   })
   .then((evenNumbers) => {
@@ -27,7 +27,7 @@ getNumbers()
         document.getElementById("output").textContent =
           multipliedNumbers.join(", ");
         resolve(multipliedNumbers);
-      }, 2000); // Delay of 2 seconds
+      }, 4000); // Delay of 2 seconds
     });
   })
   .catch((err) => console.error(err));
